@@ -1,0 +1,15 @@
+name: Format suggestions
+on:
+  push:
+    branches:
+      - main
+    tags: ['*']
+  pull_request:
+  workflow_dispatch:
+jobs:
+  code-style:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Format suggestion with Ruff
+
+        uses: astral-sh/ruff-action@v3

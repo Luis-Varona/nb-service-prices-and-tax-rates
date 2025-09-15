@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69.0.0", "wheel>=0.42.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nb-service-prices-and-tax-rates"
+version = "1.0.0"
+description = "The effects of changes in effective prices of services on municipal tax rates: evidence from New Brunswick"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "Craig Brett" },
+    { name = "Luis M. B. Varona", email = "lm.varona@outlook.com" },
+]
+maintainers = [
+    { name = "Luis M. B. Varona", email = "lm.varona@outlook.com" },
+]
+dependencies =["bs4>=0.0.2", "polars>=0.20.0", "selenium>=4.16.0"]
+keywords = [
+    "economics",
+    "econometrics",
+    "economic policy",
+    "public policy",
+    "tax rates",
+]
+
+[project.urls]
+Repository = "https://github.com/Luis-Varona/nb-service-prices-and-tax-rates"
+
+[project.optional-dependencies]
+static-analysis = ["mypy", "ruff"]
+
+[tool.mypy]
+disable_error_code = ["import-untyped"]

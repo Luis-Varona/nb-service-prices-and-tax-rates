@@ -16,7 +16,14 @@ authors = [
 maintainers = [
     { name = "Luis M. B. Varona", email = "lm.varona@outlook.com" },
 ]
-dependencies =["bs4>=0.0.2", "polars>=0.20.0", "selenium>=4.16.0"]
+dependencies = [
+    "bs4>=0.0.2",
+    "fastexcel>=0.10.0",  # Used to read Excel files by `polars`
+    "pandas>=2.0.0",
+    "polars>=1.0.0",
+    "xlrd>=2.0.0",  # Used to read Excel files by `pandas`
+    "xlsxwriter>=3.0.0",  # Used to write multiple sheets to an Excel file
+]
 keywords = [
     "economics",
     "econometrics",

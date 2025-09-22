@@ -29,7 +29,7 @@ DST_DIR = DATA_DIR / "data_clean"
 
 # %%
 @suppress_fastexcel_logging
-def main():
+def main() -> None:
     write_clean_pol_prov_data()
     write_clean_bgt_exps_data()
     write_clean_bgt_revs_data()

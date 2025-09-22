@@ -29,6 +29,7 @@ DST_DIR = DATA_DIR / "data_xlsx"
 
 
 # %%
+@suppress_fastexcel_logging
 def main() -> None:
     for suffix in (".xlsx", ".xls", ".xlw"):
         for file in SRC_DIR.rglob(f"*{suffix}"):
@@ -36,7 +37,6 @@ def main() -> None:
 
 
 # %%
-@suppress_fastexcel_logging
 def cp_excel_as_xlsx(file: Path, src_dir: Path, dst_dir: Path) -> None:
     suffix = file.suffix.lower()
     dst = dst_dir / file.relative_to(src_dir).with_suffix(".xlsx")

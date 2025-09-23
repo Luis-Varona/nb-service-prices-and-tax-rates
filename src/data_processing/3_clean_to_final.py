@@ -258,8 +258,7 @@ def convert_final_to_master(dfs_final: dict[str, pl.DataFrame]) -> pl.DataFrame:
     prov_map = dict(zip(*dfs_final["pol_prov"]))
 
     return (
-        df_master.with_columns(pl.col("AvgTaxRate") / 100)
-        .with_columns(pl.col(COLUMNS_SCALE) * SCALE_FACTOR)
+        df_master.with_columns(pl.col(COLUMNS_SCALE) * SCALE_FACTOR)
         .with_columns(
             (pl.col("TaxBase") / pl.col("LatestCensusPop")).alias("TaxBaseCapita")
         )

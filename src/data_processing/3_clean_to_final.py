@@ -278,6 +278,7 @@ def convert_final_to_master(dfs_final: dict[str, pl.DataFrame]) -> pl.DataFrame:
         )
         .with_columns(pl.col("Municipality").replace(prov_map).alias("Provider"))
         .to_dummies("Provider")
+        .with_columns(cs.matches("Provider_*").cast(pl.Boolean))
         .select(COLUMNS_MASTER)
     )
 

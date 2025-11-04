@@ -1,0 +1,82 @@
+
+=== CLUSTER 0 ===
+- Saint-Louis-de-Kent:          Post11 =   -0.032,  Year:Post11 =  0.00472
+- Cambridge-Narrows:            Post11 =   -0.012,  Year:Post11 =  0.00502
+- Norton:                       Post11 =   -0.052,  Year:Post11 =  0.00528
+- Perth-Andover:                Post11 =   -0.030,  Year:Post11 =  0.00597
+- Rogersville:                  Post11 =   -0.090,  Year:Post11 =  0.00649
+- Alma:                         Post11 =   -0.013,  Year:Post11 =  0.00671
+- Meductic:                     Post11 =   -0.062,  Year:Post11 =  0.00720
+- Saint-Hilaire:                Post11 =   -0.044,  Year:Post11 =  0.00764
+- Lac Baker:                    Post11 =   -0.084,  Year:Post11 =  0.00766
+- Sussex Corner:                Post11 =   -0.070,  Year:Post11 =  0.00774
+- Blackville:                   Post11 =   -0.114,  Year:Post11 =  0.00829
+- Saint-François-de-Madawaska:  Post11 =   -0.085,  Year:Post11 =  0.00928
+- Saint-Antoine:                Post11 =   -0.109,  Year:Post11 =  0.00949
+- Saint-Léonard:                Post11 =   -0.126,  Year:Post11 =  0.00977
+- Florenceville-Bristol:        Post11 =   -0.028,  Year:Post11 =  0.01009
+- Doaktown:                     Post11 =   -0.073,  Year:Post11 =  0.01062
+- Belledune:                    Post11 =   -0.175,  Year:Post11 =  0.01148
+- Saint George:                 Post11 =   -0.108,  Year:Post11 =  0.01162
+- Tracadie-Sheila:              Post11 =   -0.157,  Year:Post11 =  0.01177
+- Harvey:                       Post11 =   -0.144,  Year:Post11 =  0.01306
+- Rexton:                       Post11 =   -0.123,  Year:Post11 =  0.01313
+- Grand Manan:                  Post11 =   -0.122,  Year:Post11 =  0.01406
+- Clair:                        Post11 =   -0.204,  Year:Post11 =  0.01743
+  Cluster mean: 0.00933
+  Cluster size: 23
+
+=== CLUSTER 1 ===
+- Richibucto:                   Post11 =    0.116,  Year:Post11 = -0.01130
+- Dalhousie:                    Post11 =    0.153,  Year:Post11 = -0.01118
+- McAdam:                       Post11 =    0.084,  Year:Post11 = -0.01117
+- Minto:                        Post11 =    0.097,  Year:Post11 = -0.01100
+- Shippagan:                    Post11 =    0.124,  Year:Post11 = -0.00811
+- Saint-Léolin:                 Post11 =    0.137,  Year:Post11 = -0.00788
+- Nackawic:                     Post11 =    0.069,  Year:Post11 = -0.00756
+- Néguac:                       Post11 =    0.074,  Year:Post11 = -0.00679
+- Hartland:                     Post11 =    0.062,  Year:Post11 = -0.00571
+- Grand Bay-Westfield:          Post11 =    0.084,  Year:Post11 = -0.00543
+- St. Martins:                  Post11 =    0.103,  Year:Post11 = -0.00502
+- Saint-Quentin:                Post11 =    0.072,  Year:Post11 = -0.00490
+- Caraquet:                     Post11 =    0.059,  Year:Post11 = -0.00444
+- Tracy:                        Post11 =    0.049,  Year:Post11 = -0.00435
+- Grande-Anse:                  Post11 =    0.084,  Year:Post11 = -0.00418
+- New Maryland:                 Post11 =    0.053,  Year:Post11 = -0.00377
+- Millville:                    Post11 =    0.032,  Year:Post11 = -0.00348
+- Chipman:                      Post11 =    0.042,  Year:Post11 = -0.00325
+- Le Goulet:                    Post11 =    0.051,  Year:Post11 = -0.00288
+- Sainte-Marie-Saint-Raphaël:   Post11 =    0.051,  Year:Post11 = -0.00252
+- Fredericton Junction:         Post11 =    0.026,  Year:Post11 = -0.00234
+- Stanley:                      Post11 =    0.033,  Year:Post11 = -0.00216
+- Gagetown:                     Post11 =    0.044,  Year:Post11 = -0.00203
+- Sussex:                       Post11 =   -0.014,  Year:Post11 = -0.00161
+- Bertrand:                     Post11 =    0.045,  Year:Post11 = -0.00112
+- Maisonnette:                  Post11 =    0.046,  Year:Post11 = -0.00081
+- Eel River Crossing:           Post11 =    0.029,  Year:Post11 = -0.00069
+- Saint-Isidore:                Post11 =    0.053,  Year:Post11 = -0.00049
+- Bas-Caraquet:                 Post11 =    0.033,  Year:Post11 = -0.00042
+- St. Stephen:                  Post11 =   -0.037,  Year:Post11 = -0.00022
+- Shediac:                      Post11 =   -0.016,  Year:Post11 =  0.00011
+- Canterbury:                   Post11 =    0.021,  Year:Post11 =  0.00014
+- Charlo:                       Post11 =    0.026,  Year:Post11 =  0.00117
+- Aroostook:                    Post11 =   -0.010,  Year:Post11 =  0.00118
+- Sainte-Anne-de-Madawaska:     Post11 =   -0.015,  Year:Post11 =  0.00118
+- Port Elgin:                   Post11 =    0.005,  Year:Post11 =  0.00140
+- Balmoral:                     Post11 =    0.013,  Year:Post11 =  0.00149
+- Lamèque:                      Post11 =    0.029,  Year:Post11 =  0.00157
+- Riverside-Albert:             Post11 =   -0.010,  Year:Post11 =  0.00171
+- Paquetville:                  Post11 =    0.020,  Year:Post11 =  0.00192
+- Salisbury:                    Post11 =   -0.004,  Year:Post11 =  0.00193
+- Cap-Pelé:                     Post11 =   -0.007,  Year:Post11 =  0.00200
+- Memramcook:                   Post11 =   -0.013,  Year:Post11 =  0.00207
+- Bath:                         Post11 =   -0.003,  Year:Post11 =  0.00211
+- Kedgwick:                     Post11 =    0.000,  Year:Post11 =  0.00218
+- Petitcodiac:                  Post11 =   -0.007,  Year:Post11 =  0.00238
+- Baker-Brook:                  Post11 =   -0.047,  Year:Post11 =  0.00297
+- Plaster Rock:                 Post11 =   -0.001,  Year:Post11 =  0.00316
+- Centreville:                  Post11 =    0.003,  Year:Post11 =  0.00330
+- Hillsborough:                 Post11 =   -0.026,  Year:Post11 =  0.00335
+- Blacks Harbour:               Post11 =   -0.056,  Year:Post11 =  0.00337
+  Cluster mean: -0.00189
+  Cluster size: 51

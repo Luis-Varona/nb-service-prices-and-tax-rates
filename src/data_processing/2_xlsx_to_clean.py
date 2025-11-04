@@ -6,6 +6,8 @@
 
 
 # %%
+import re
+
 from io import BytesIO
 from pathlib import Path
 from sys import path
@@ -45,7 +47,7 @@ def clean_munis(df: pl.DataFrame) -> pl.DataFrame:
         .str.replace_all(r"\s[-\(].*", "")
         .str.strip_chars()
         .str.replace_all(r"\n\s*", "")
-        .str.replace_all(r"_X000d_", "")
+        .str.replace_all(r"_X000(D|d)_", "")
         .str.replace_all(r"\\", "/")
         .str.replace_all(r"-\s*", "-")
         .str.replace_all(" De ", " de ")
@@ -186,7 +188,7 @@ def clean_bgt_exps_data(file: Path) -> pl.DataFrame:
     skip = next(
         i
         for i, row in enumerate(df_init.iter_rows(), 1)
-        if row[1] and row[1].title().startswith("Fredericton")
+        if row[1] and re.match(r"(Fredericton|Bathurst)", row[1].title())
     )
     columns = [
         "Index",
@@ -244,7 +246,7 @@ def clean_bgt_revs_data(file: Path) -> pl.DataFrame:
     skip = next(
         i
         for i, row in enumerate(df_init.iter_rows(), 1)
-        if row[1] and row[1].title().startswith("Fredericton")
+        if row[1] and re.match(r"(Fredericton|Bathurst)", row[1].title())
     )
     columns = [
         "Index",
@@ -294,7 +296,7 @@ def clean_cmp_data(file: Path) -> pl.DataFrame:
     skip = next(
         i
         for i, row in enumerate(df_init.iter_rows(), 1)
-        if row[1] and row[1].title().startswith("Fredericton")
+        if row[1] and re.match(r"(Fredericton|Bathurst)", row[1].title())
     )
     columns = [
         "Index",
@@ -366,7 +368,7 @@ def clean_tax_base_data(file: Path) -> pl.DataFrame:
     skip = next(
         i
         for i, row in enumerate(df_init.iter_rows(), 1)
-        if row[1] and row[1].title().startswith("Fredericton")
+        if row[1] and re.match(r"(Fredericton|Bathurst)", row[1].title())
     )
     columns = [
         "Index",

@@ -1,0 +1,42 @@
+Group 1 (4 municipalities):
+  - Atholville
+  - Oromocto
+  - Saint Andrews
+  - Saint-André
+
+Group 2 (4 municipalities):
+  - Bouctouche
+  - Dorchester
+  - Drummond
+  - Hampton
+
+Group 3 (4 municipalities):
+  - Fredericton
+  - Moncton
+  - Rivière-Verte
+  - Saint John
+
+Group 4 (4 municipalities):
+  - Grand Falls/Grand-Sault
+  - Sackville
+  - Tide Head
+  - Woodstock
+
+Group 5 (4 municipalities):
+  - Beresford
+  - Nigadoo
+  - Petit-Rocher
+  - Pointe-Verte
+
+Group 6 (4 municipalities):
+  - Bathurst
+  - Dieppe
+  - Miramichi
+  - Riverview
+
+Group 7 (4 municipalities):
+  - Campbellton
+  - Edmundston
+  - Quispamsis
+  - Rothesay
+

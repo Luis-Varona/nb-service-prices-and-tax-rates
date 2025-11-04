@@ -1,0 +1,90 @@
+Group 1 (11 municipalities):
+  - Alma
+  - Chipman
+  - Florenceville
+  - Petitcodiac
+  - Port Elgin
+  - Saint-François-de-Madawaska
+  - Saint-Hilaire
+  - Saint-Louis-de-Kent
+  - Saint-Léonard
+  - St. Martins
+  - Stanley
+
+Group 2 (11 municipalities):
+  - Bristol
+  - Cambridge-Narrows
+  - Florenceville-Bristol
+  - Fredericton Junction
+  - Gagetown
+  - Grande-Anse
+  - Hillsborough
+  - Lamèque
+  - Perth-Andover
+  - Plaster Rock
+  - Rexton
+
+Group 3 (11 municipalities):
+  - Belledune
+  - Cap-Pelé
+  - Centreville
+  - Clair
+  - Kedgwick
+  - Nackawic
+  - Paquetville
+  - Riverside-Albert
+  - Saint-Isidore
+  - Sainte-Anne-de-Madawaska
+  - Shippagan
+
+Group 4 (11 municipalities):
+  - Baker-Brook
+  - Charlo
+  - Doaktown
+  - Grand Bay-Westfield
+  - Hartland
+  - Meductic
+  - Memramcook
+  - Millville
+  - New Maryland
+  - Saint-Antoine
+  - Shediac
+
+Group 5 (11 municipalities):
+  - Balmoral
+  - Bas-Caraquet
+  - Bath
+  - Bertrand
+  - Caraquet
+  - Lac Baker
+  - Norton
+  - Saint George
+  - Saint-Quentin
+  - St. Stephen
+  - Sussex
+
+Group 6 (11 municipalities):
+  - Blacks Harbour
+  - Canterbury
+  - Grand Manan
+  - Maisonnette
+  - Minto
+  - Néguac
+  - Richibucto
+  - Rogersville
+  - Sainte-Marie-Saint-Raphaël
+  - Tracadie-Sheila
+  - Tracy
+
+Group 7 (10 municipalities):
+  - Aroostook
+  - Blackville
+  - Dalhousie
+  - Eel River Crossing
+  - Harvey
+  - Le Goulet
+  - McAdam
+  - Saint-Léolin
+  - Salisbury
+  - Sussex Corner
+

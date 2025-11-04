@@ -23,6 +23,7 @@ DST_DIR = DATA_DIR / "data_final"
 YEARS = range(2000, 2021)
 
 CATEGORIES = ["bgt_revs", "bgt_exps", "cmp_data", "tax_base"]
+MUNI_CAT = "cmp_data"
 
 SCHEMAS_MASTER = {
     "bgt_exps": pl.Schema(
@@ -147,6 +148,19 @@ MAPS_MASTER = {
 
 
 # %%
+COMBINE_COLS = ("Year", "Municipality")
+MUNIS_COMBINE = {"Florenceville-Bristol": ["Florenceville", "Bristol"]}
+FIELDS_CONSTANT = ["Year", "Municipality"]
+FIELDS_WEIGHTED = {
+    ("cmp_data", "Population/Kilometrage"): ("cmp_data", "Total Kilometrage"),
+    ("cmp_data", "Tax Base/Capita"): ("cmp_data", "Latest Census Population"),
+    ("cmp_data", "Tax Base/Kilometrage"): ("cmp_data", "Total Kilometrage"),
+    ("cmp_data", "Fiscal Capacity"): ("cmp_data", "Latest Census Population"),
+    ("cmp_data", "Average Tax Rate"): ("tax_base", "Total Tax Base for Rate"),
+}
+
+
+# %%
 def main() -> None:
     dfs_final = convert_clean_to_final()
     df_master = convert_final_to_master(dfs_final)
@@ -164,10 +178,12 @@ def main() -> None:
 # %%
 def convert_clean_to_final() -> dict[str, pl.DataFrame]:
     dfs_concat = concat_panels_by_cat()
-    muni_list = dfs_concat["cmp_data"].to_series(1).unique()
+    dfs_combined = combine_munis_all(dfs_concat)
+
+    muni_list = dfs_combined[MUNI_CAT].to_series(1).unique()
     df_pol_prov = melt_pol_prov_data(muni_list)
 
-    return dfs_concat | {"pol_prov": df_pol_prov}
+    return dfs_combined | {"pol_prov": df_pol_prov}
 
 
 def concat_panels_by_cat() -> dict[str, pl.DataFrame]:
@@ -186,6 +202,105 @@ def concat_panels_by_cat() -> dict[str, pl.DataFrame]:
         )
         for cat in CATEGORIES
     }
+
+
+def combine_munis_all(dfs: dict[str, pl.DataFrame]) -> dict[str, pl.DataFrame]:
+    dfs_combined = {}
+
+    for cat in CATEGORIES:
+        df = dfs[cat].clone()
+        needs_cross_weight = {}
+
+        for (field_cat, field_name), (
+            weight_cat,
+            weight_name,
+        ) in FIELDS_WEIGHTED.items():
+            if field_cat == cat and weight_cat != cat:
+                needs_cross_weight[field_name] = (weight_cat, weight_name)
+
+        temp_weight_cols = {}
+
+        for field_name, (weight_cat, weight_name) in needs_cross_weight.items():
+            temp_col_name = f"_temp_weight_{field_name}"
+            temp_weight_cols[field_name] = temp_col_name
+
+            df = df.join(
+                dfs[weight_cat].select(list(COMBINE_COLS) + [weight_name]),
+                list(COMBINE_COLS),
+                "left",
+            ).rename({weight_name: temp_col_name})
+
+        for target_muni, source_munis in MUNIS_COMBINE.items():
+            df = df.with_row_index("_original_index")
+            mask = pl.col(COMBINE_COLS[1]).is_in(source_munis)
+            to_combine = df.filter(mask)
+            to_keep = df.filter(~mask)
+
+            if to_combine.height == 0:
+                df = df.drop("_original_index")
+            else:
+                group_cols = [col for col in COMBINE_COLS if col != COMBINE_COLS[1]]
+                agg_exprs = []
+
+                for col_name in df.columns:
+                    if col_name not in list(temp_weight_cols.values()) + group_cols:
+                        if col_name == "_original_index":
+                            agg_exprs.append(
+                                pl.col("_original_index").min().alias("_original_index")
+                            )
+                        elif col_name in FIELDS_CONSTANT:
+                            if col_name == COMBINE_COLS[1]:
+                                agg_exprs.append(pl.lit(target_muni).alias(col_name))
+                            else:
+                                agg_exprs.append(
+                                    pl.col(col_name).first().alias(col_name)
+                                )
+                        elif (cat, col_name) in FIELDS_WEIGHTED:
+                            weight_cat, weight_col = FIELDS_WEIGHTED[(cat, col_name)]
+
+                            if weight_cat == cat:
+                                agg_exprs.append(
+                                    (
+                                        (pl.col(col_name) * pl.col(weight_col)).sum()
+                                        / pl.col(weight_col).sum()
+                                    ).alias(col_name)
+                                )
+                            else:
+                                temp_col_name = temp_weight_cols[col_name]
+
+                                agg_exprs.append(
+                                    (
+                                        (pl.col(col_name) * pl.col(temp_col_name)).sum()
+                                        / pl.col(temp_col_name).sum()
+                                    ).alias(col_name)
+                                )
+                        else:
+                            if df.schema[col_name].is_numeric():
+                                agg_exprs.append(pl.col(col_name).sum().alias(col_name))
+                            else:
+                                agg_exprs.append(
+                                    pl.col(col_name).first().alias(col_name)
+                                )
+
+                final_cols = [
+                    col for col in df.columns if col not in temp_weight_cols.values()
+                ]
+
+                to_keep = to_keep.select(final_cols)
+
+                combined = (
+                    to_combine.group_by(group_cols).agg(agg_exprs).select(final_cols)
+                )
+
+                df = (
+                    pl.concat([to_keep, combined])
+                    .sort("_original_index")
+                    .drop("_original_index")
+                )
+
+        dfs_combined[cat] = df
+
+    return dfs_combined
 
 
 def melt_pol_prov_data(muni_list: pl.Series) -> pl.DataFrame:

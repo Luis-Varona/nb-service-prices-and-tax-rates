@@ -151,12 +151,18 @@ MAPS_MASTER = {
 COMBINE_COLS = ("Year", "Municipality")
 MUNIS_COMBINE = {"Florenceville-Bristol": ["Florenceville", "Bristol"]}
 FIELDS_CONSTANT = ["Year", "Municipality"]
+FIELDS_DROPPED = [("cmp_data", "Fiscal Capacity")]
 FIELDS_WEIGHTED = {
     ("cmp_data", "Population/Kilometrage"): ("cmp_data", "Total Kilometrage"),
     ("cmp_data", "Tax Base/Capita"): ("cmp_data", "Latest Census Population"),
     ("cmp_data", "Tax Base/Kilometrage"): ("cmp_data", "Total Kilometrage"),
-    ("cmp_data", "Fiscal Capacity"): ("cmp_data", "Latest Census Population"),
-    ("cmp_data", "Average Tax Rate"): ("tax_base", "Total Tax Base for Rate"),
+}
+FIELDS_RECOMPUTED = {
+    ("cmp_data", "Average Tax Rate"): (
+        lambda x, y: x / y,
+        ("bgt_revs", "Warrant"),
+        ("tax_base", "Total Tax Base for Rate"),
+    ),
 }
 
 
@@ -298,7 +304,35 @@ def combine_munis_all(dfs: dict[str, pl.DataFrame]) -> dict[str, pl.DataFrame]:
                     .drop("_original_index")
                 )
 
+        for field_cat, field_name in FIELDS_DROPPED:
+            if field_cat == cat and field_name in df.columns:
+                df = df.drop(field_name)
+
         dfs_combined[cat] = df
+
+    for (target_cat, target_field), (
+        func,
+        (src_cat1, src_field1),
+        (src_cat2, src_field2),
+    ) in FIELDS_RECOMPUTED.items():
+        if target_cat in dfs_combined:
+            dfs_combined[target_cat] = (
+                dfs_combined[target_cat]
+                .join(
+                    dfs_combined[src_cat1].select(list(COMBINE_COLS) + [src_field1]),
+                    list(COMBINE_COLS),
+                    "left",
+                )
+                .join(
+                    dfs_combined[src_cat2].select(list(COMBINE_COLS) + [src_field2]),
+                    list(COMBINE_COLS),
+                    "left",
+                )
+                .with_columns(
+                    func(pl.col(src_field1), pl.col(src_field2)).alias(target_field)
+                )
+                .drop([src_field1, src_field2])
+            )
 
     return dfs_combined
 

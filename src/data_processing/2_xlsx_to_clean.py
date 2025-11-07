@@ -228,6 +228,16 @@ def clean_bgt_exps_data(file: Path) -> pl.DataFrame:
         .fill_null(0)
     )
 
+    exp_cols = [
+        c for c in df.columns if c not in {"Municipality", "Total Expenditures"}
+    ]
+    df = df.with_columns(
+        pl.when(pl.col("Total Expenditures") == 0)
+        .then(pl.sum_horizontal(pl.col(exp_cols)))
+        .otherwise(pl.col("Total Expenditures"))
+        .alias("Total Expenditures")
+    )
+
     return clean_munis(df)
 
 

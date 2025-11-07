@@ -26,8 +26,8 @@ COLUMNS = {
         "Municipality",
         "AvgTaxRate",
         "PolExpCapita",
-        "OtherExpCapita",
         "Provider_PPSA",
+        "LatestCensusPop",
     ],
     "bgt_revs": ["Year", "Municipality", "Unconditional Grant"],
 }
@@ -47,28 +47,28 @@ def main() -> None:
         df = df.join(other_df, on=JOIN_COLS, how="left")
 
     df = (
-        df.with_columns(
-            (
-                pl.col("PolExpCapita")
-                / (pl.col("PolExpCapita") + pl.col("OtherExpCapita"))
-            ).alias("PolExpShare"),
+        df.rename({"Unconditional Grant": "UnconditionalGrant"})
+        .with_columns(
+            (pl.col("UnconditionalGrant") / pl.col("LatestCensusPop")).alias(
+                "UnconditionalGrantCapita"
+            )
         )
-        .rename({"Unconditional Grant": "UnconditionalGrant"})
-        .drop(["PolExpCapita", "OtherExpCapita"])
+        .drop(["UnconditionalGrant", "LatestCensusPop"])
         .to_pandas()
-    )
-
-    formula = (
-        "AvgTaxRate ~ 1 + PolExpShare*Provider_PPSA + UnconditionalGrant*Provider_PPSA"
     )
 
     df["entity"] = 1
     df.set_index(["entity", TIME_VAR], inplace=True)
-    print(df)
 
-    model = PooledOLS.from_formula(formula, df)
-    result = model.fit()
-    print(result.summary)
+    formula1 = "AvgTaxRate ~ 1 + PolExpCapita*Provider_PPSA + UnconditionalGrantCapita*Provider_PPSA"
+    model1 = PooledOLS.from_formula(formula1, df)
+    result1 = model1.fit()
+    print(result1.summary)
+
+    formula2 = "AvgTaxRate ~ 1 + PolExpCapita + UnconditionalGrantCapita + PolExpCapita:Provider_PPSA + UnconditionalGrantCapita:Provider_PPSA"
+    model2 = PooledOLS.from_formula(formula2, df)
+    result2 = model2.fit()
+    print(result2.summary)
 
 
 # %%

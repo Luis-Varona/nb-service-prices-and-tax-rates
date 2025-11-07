@@ -10,7 +10,7 @@ from pathlib import Path
 
 import polars as pl
 
-from linearmodels.panel.model import PooledOLS
+from linearmodels.panel.model import PanelOLS
 
 
 # %%
@@ -26,12 +26,13 @@ COLUMNS = {
         "Municipality",
         "AvgTaxRate",
         "PolExpCapita",
-        "OtherExpCapita",
         "Provider_PPSA",
+        "LatestCensusPop",
     ],
     "bgt_revs": ["Year", "Municipality", "Unconditional Grant"],
 }
 JOIN_COLS = ["Year", "Municipality"]
+ENTITY_VAR = "Municipality"
 TIME_VAR = "Year"
 
 
@@ -47,28 +48,27 @@ def main() -> None:
         df = df.join(other_df, on=JOIN_COLS, how="left")
 
     df = (
-        df.with_columns(
-            (
-                pl.col("PolExpCapita")
-                / (pl.col("PolExpCapita") + pl.col("OtherExpCapita"))
-            ).alias("PolExpShare"),
+        df.rename({"Unconditional Grant": "UnconditionalGrant"})
+        .with_columns(
+            (pl.col("UnconditionalGrant") / pl.col("LatestCensusPop")).alias(
+                "UnconditionalGrantCapita"
+            )
         )
-        .rename({"Unconditional Grant": "UnconditionalGrant"})
-        .drop(["PolExpCapita", "OtherExpCapita"])
+        .drop(["UnconditionalGrant", "LatestCensusPop"])
         .to_pandas()
     )
 
-    formula = (
-        "AvgTaxRate ~ 1 + PolExpShare*Provider_PPSA + UnconditionalGrant*Provider_PPSA"
-    )
+    df.set_index([ENTITY_VAR, TIME_VAR], inplace=True)
+    formula = "AvgTaxRate ~ 1 + PolExpCapita*Provider_PPSA + UnconditionalGrantCapita*Provider_PPSA + EntityEffects"
 
-    df["entity"] = 1
-    df.set_index(["entity", TIME_VAR], inplace=True)
-    print(df)
+    model1 = PanelOLS.from_formula(formula, df, drop_absorbed=True)
+    result1 = model1.fit(cov_type="clustered", cluster_entity=True)
+    print(result1.summary)
 
-    model = PooledOLS.from_formula(formula, df)
-    result = model.fit()
-    print(result.summary)
+    df = df.loc[df.index.get_level_values("Year") >= 2012]
+    model2 = PanelOLS.from_formula(formula, df, drop_absorbed=True)
+    result2 = model2.fit(cov_type="clustered", cluster_entity=True)
+    print(result2.summary)
 
 
 # %%

@@ -8,7 +8,9 @@
 # %%
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import polars as pl
+import seaborn as sns
 
 from linearmodels.panel.model import PooledOLS
 
@@ -17,6 +19,8 @@ from linearmodels.panel.model import PooledOLS
 WD = Path(__file__).parent
 DATA_DIR = WD.parent / "data" / "data_final"
 SRC_STEM = "data"
+TEX_DIR = WD / "tex"
+PLOTS_DIR = WD / "plots"
 
 
 # %%
@@ -64,11 +68,63 @@ def main() -> None:
 
     df["entity"] = 1
     df.set_index(["entity", TIME_VAR], inplace=True)
-    print(df)
 
     model = PooledOLS.from_formula(formula, df)
     result = model.fit()
+    print("====================SHARE REGRESSION====================")
     print(result.summary)
+    print()
+
+    TEX_DIR.mkdir(parents=True, exist_ok=True)
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    with open(TEX_DIR / "share_regression.tex", "w") as f:
+        f.write(result.summary.as_latex())
+
+    df["AvgTaxRate_adj"] = 100 * (
+        df["AvgTaxRate"]
+        - result.params["UnconditionalGrant"] * df["UnconditionalGrant"]
+        - result.params["UnconditionalGrant:Provider_PPSA"]
+        * df["UnconditionalGrant"]
+        * df["Provider_PPSA"]
+    )
+
+    df["Fitted"] = 100 * (
+        result.params["Intercept"]
+        + result.params["PolExpShare"] * df["PolExpShare"]
+        + result.params["Provider_PPSA"] * df["Provider_PPSA"]
+        + result.params["PolExpShare:Provider_PPSA"]
+        * df["PolExpShare"]
+        * df["Provider_PPSA"]
+        + result.params["UnconditionalGrant"] * df["UnconditionalGrant"].mean()
+        + result.params["UnconditionalGrant:Provider_PPSA"]
+        * df["UnconditionalGrant"].mean()
+        * df["Provider_PPSA"]
+    )
+
+    sns.scatterplot(
+        df,
+        x="PolExpShare",
+        y="AvgTaxRate_adj",
+        hue="Provider_PPSA",
+        s=20,
+        alpha=0.75,
+    )
+
+    sns.lineplot(
+        df,
+        x="PolExpShare",
+        y="Fitted",
+        hue="Provider_PPSA",
+        lw=2,
+        palette=["green", "red"],
+    )
+
+    plt.xlabel("Police Expenditure/Total Expenditure")
+    plt.ylabel("Avg. Tax Rate (%, adj. for grant effects)")
+    plt.title("Average Tax Rate vs. Police Expenditure Share")
+    plt.savefig(PLOTS_DIR / "share_regression.png", dpi=300, bbox_inches="tight")
+    plt.close()
 
 
 # %%

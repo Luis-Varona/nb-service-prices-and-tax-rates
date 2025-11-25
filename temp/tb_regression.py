@@ -29,11 +29,12 @@ COLUMNS = {
         "Year",
         "Municipality",
         "AvgTaxRate",
-        "PolExpCapita",
         "Provider_PPSA",
         "LatestCensusPop",
     ],
+    "bgt_exps": ["Year", "Municipality", "Police"],
     "bgt_revs": ["Year", "Municipality", "Unconditional Grant"],
+    "tax_base": ["Municipality", "Year", "Total Tax Base for Rate"],
 }
 JOIN_COLS = ["Year", "Municipality"]
 TIME_VAR = "Year"
@@ -53,68 +54,78 @@ def main() -> None:
     df = (
         df.rename({"Unconditional Grant": "UnconditionalGrant"})
         .with_columns(
-            (pl.col("UnconditionalGrant") / pl.col("LatestCensusPop")).alias(
-                "UnconditionalGrantCapita"
-            )
+            (pl.col("Police") / pl.col("Total Tax Base for Rate")).alias(
+                "PolExpTaxBase"
+            ),
+            (pl.col("UnconditionalGrant") / pl.col("Total Tax Base for Rate")).alias(
+                "UnconditionalGrantTaxBase"
+            ),
         )
-        .drop(["UnconditionalGrant", "LatestCensusPop"])
+        .drop(
+            [
+                "Police",
+                "UnconditionalGrant",
+                "LatestCensusPop",
+                "Total Tax Base for Rate",
+            ]
+        )
         .to_pandas()
     )
 
     df["entity"] = 1
     df.set_index(["entity", TIME_VAR], inplace=True)
 
-    formula1 = "AvgTaxRate ~ 1 + PolExpCapita*Provider_PPSA + UnconditionalGrantCapita*Provider_PPSA"
+    formula1 = "AvgTaxRate ~ 1 + PolExpTaxBase*Provider_PPSA + UnconditionalGrantTaxBase*Provider_PPSA"
     model1 = PooledOLS.from_formula(formula1, df)
     result1 = model1.fit()
-    print("====================INT CAPITA REGRESSION====================")
+    print("====================INT UNIT TAX BASE REGRESSION====================")
     print(result1.summary)
     print()
 
     formula2 = (
-        "AvgTaxRate ~ 1 + PolExpCapita + UnconditionalGrantCapita + "
-        "PolExpCapita:Provider_PPSA + UnconditionalGrantCapita:Provider_PPSA"
+        "AvgTaxRate ~ 1 + PolExpTaxBase + UnconditionalGrantTaxBase + "
+        "PolExpTaxBase:Provider_PPSA + UnconditionalGrantTaxBase:Provider_PPSA"
     )
     model2 = PooledOLS.from_formula(formula2, df)
     result2 = model2.fit()
-    print("====================FULL CAPITA REGRESSION====================")
+    print("====================FULL UNIT TAX BASE REGRESSION====================")
     print(result2.summary)
     print()
 
     TEX_DIR.mkdir(parents=True, exist_ok=True)
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    with open(TEX_DIR / "capita_regression_int.tex", "w") as f:
+    with open(TEX_DIR / "tax_base_regression_int.tex", "w") as f:
         f.write(result1.summary.as_latex())
 
-    with open(TEX_DIR / "capita_regression_full.tex", "w") as f:
+    with open(TEX_DIR / "tax_base_regression_full.tex", "w") as f:
         f.write(result2.summary.as_latex())
 
     df["AvgTaxRate_adj_int"] = 100 * (
         df["AvgTaxRate"]
-        - result1.params["UnconditionalGrantCapita"] * df["UnconditionalGrantCapita"]
-        - result1.params["UnconditionalGrantCapita:Provider_PPSA"]
-        * df["UnconditionalGrantCapita"]
+        - result1.params["UnconditionalGrantTaxBase"] * df["UnconditionalGrantTaxBase"]
+        - result1.params["UnconditionalGrantTaxBase:Provider_PPSA"]
+        * df["UnconditionalGrantTaxBase"]
         * df["Provider_PPSA"]
     )
 
     df["Fitted_int"] = 100 * (
         result1.params["Intercept"]
-        + result1.params["PolExpCapita"] * df["PolExpCapita"]
+        + result1.params["PolExpTaxBase"] * df["PolExpTaxBase"]
         + result1.params["Provider_PPSA"] * df["Provider_PPSA"]
-        + result1.params["PolExpCapita:Provider_PPSA"]
-        * df["PolExpCapita"]
+        + result1.params["PolExpTaxBase:Provider_PPSA"]
+        * df["PolExpTaxBase"]
         * df["Provider_PPSA"]
-        + result1.params["UnconditionalGrantCapita"]
-        * df["UnconditionalGrantCapita"].mean()
-        + result1.params["UnconditionalGrantCapita:Provider_PPSA"]
-        * df["UnconditionalGrantCapita"].mean()
+        + result1.params["UnconditionalGrantTaxBase"]
+        * df["UnconditionalGrantTaxBase"].mean()
+        + result1.params["UnconditionalGrantTaxBase:Provider_PPSA"]
+        * df["UnconditionalGrantTaxBase"].mean()
         * df["Provider_PPSA"]
     )
 
     sns.scatterplot(
         df,
-        x="PolExpCapita",
+        x="PolExpTaxBase",
         y="AvgTaxRate_adj_int",
         hue="Provider_PPSA",
         s=20,
@@ -123,43 +134,43 @@ def main() -> None:
 
     sns.lineplot(
         df,
-        x="PolExpCapita",
+        x="PolExpTaxBase",
         y="Fitted_int",
         hue="Provider_PPSA",
         lw=2,
         palette=["green", "red"],
     )
 
-    plt.xlabel("Police Expenditure/Capita")
+    plt.xlabel("Police Expenditure/Unit Tax Base")
     plt.ylabel("Avg. Tax Rate (%, adj. for grant effects)")
-    plt.title("Avg. Tax Rate vs. Police Exp./Capita (interaction only)")
-    plt.savefig(PLOTS_DIR / "capita_regression_int.png", dpi=300, bbox_inches="tight")
+    plt.title("Avg. Tax Rate vs. Police Exp./Tax Base (interaction only)")
+    plt.savefig(PLOTS_DIR / "tax_base_regression_int.png", dpi=300, bbox_inches="tight")
     plt.close()
 
     df["AvgTaxRate_adj_full"] = (
         100 * df["AvgTaxRate"]
-        - result2.params["UnconditionalGrantCapita"] * df["UnconditionalGrantCapita"]
-        - result2.params["UnconditionalGrantCapita:Provider_PPSA"]
-        * df["UnconditionalGrantCapita"]
+        - result2.params["UnconditionalGrantTaxBase"] * df["UnconditionalGrantTaxBase"]
+        - result2.params["UnconditionalGrantTaxBase:Provider_PPSA"]
+        * df["UnconditionalGrantTaxBase"]
         * df["Provider_PPSA"]
     )
 
     df["Fitted_full"] = 100 * (
         result2.params["Intercept"]
-        + result2.params["PolExpCapita"] * df["PolExpCapita"]
-        + result2.params["PolExpCapita:Provider_PPSA"]
-        * df["PolExpCapita"]
+        + result2.params["PolExpTaxBase"] * df["PolExpTaxBase"]
+        + result2.params["PolExpTaxBase:Provider_PPSA"]
+        * df["PolExpTaxBase"]
         * df["Provider_PPSA"]
-        + result2.params["UnconditionalGrantCapita"]
-        * df["UnconditionalGrantCapita"].mean()
-        + result2.params["UnconditionalGrantCapita:Provider_PPSA"]
-        * df["UnconditionalGrantCapita"].mean()
+        + result2.params["UnconditionalGrantTaxBase"]
+        * df["UnconditionalGrantTaxBase"].mean()
+        + result2.params["UnconditionalGrantTaxBase:Provider_PPSA"]
+        * df["UnconditionalGrantTaxBase"].mean()
         * df["Provider_PPSA"]
     )
 
     sns.scatterplot(
         df,
-        x="PolExpCapita",
+        x="PolExpTaxBase",
         y="AvgTaxRate_adj_full",
         hue="Provider_PPSA",
         s=20,
@@ -168,17 +179,19 @@ def main() -> None:
 
     sns.lineplot(
         df,
-        x="PolExpCapita",
+        x="PolExpTaxBase",
         y="Fitted_full",
         hue="Provider_PPSA",
         lw=2,
         palette=["green", "red"],
     )
 
-    plt.xlabel("Police Expenditure/Capita")
+    plt.xlabel("Police Expenditure/Unit Tax Base")
     plt.ylabel("Avg. Tax Rate (%, adj. for grant effects)")
-    plt.title("Avg. Tax Rate vs. Police Exp./Capita (full form)")
-    plt.savefig(PLOTS_DIR / "capita_regression_full.png", dpi=300, bbox_inches="tight")
+    plt.title("Avg. Tax Rate vs. Police Exp./Tax Base (full form)")
+    plt.savefig(
+        PLOTS_DIR / "tax_base_regression_full.png", dpi=300, bbox_inches="tight"
+    )
     plt.close()
 
 

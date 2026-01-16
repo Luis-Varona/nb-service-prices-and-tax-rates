@@ -1,0 +1,29 @@
+                          PooledOLS Estimation Summary                          
+================================================================================
+Dep. Variable:             AvgTaxRate   R-squared:                        0.1547
+Estimator:                  PooledOLS   R-squared (Between):              0.0000
+No. Observations:                2100   R-squared (Within):               0.1547
+Date:                Thu, Jan 15 2026   R-squared (Overall):              0.1547
+Time:                        22:53:13   Log-likelihood                 1.029e+04
+Cov. Estimator:            Unadjusted                                           
+                                        F-statistic:                      95.820
+Entities:                           1   P-value                           0.0000
+Avg Obs:                       2100.0   Distribution:                  F(4,2095)
+Min Obs:                       2100.0                                           
+Max Obs:                       2100.0   F-statistic (robust):             95.820
+                                        P-value                           0.0000
+Time periods:                      21   Distribution:                  F(4,2095)
+Avg Obs:                      100.000                                           
+Min Obs:                       93.000                                           
+Max Obs:                       102.00                                           
+                                                                                
+                                   Parameter Estimates                                    
+==========================================================================================
+                        Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------------------
+Intercept                  0.0124     0.0002     80.305     0.0000      0.0121      0.0127
+PolExpCapita               0.0094     0.0007     13.457     0.0000      0.0081      0.0108
+Provider_PPSA             -0.0006     0.0001    -4.6462     0.0000     -0.0008     -0.0003
+Post2011                  -0.0001     0.0002    -0.9091     0.3634     -0.0005      0.0002
+Post2011:Provider_PPSA     0.0003     0.0002     1.8779     0.0605  -1.496e-05      0.0007
+==========================================================================================

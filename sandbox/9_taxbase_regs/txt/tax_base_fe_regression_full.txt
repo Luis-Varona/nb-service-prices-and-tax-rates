@@ -1,0 +1,35 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:             AvgTaxRate   R-squared:                        0.0683
+Estimator:                   PanelOLS   R-squared (Between):              0.0818
+No. Observations:                2100   R-squared (Within):               0.0683
+Date:                Thu, Jan 15 2026   R-squared (Overall):              0.0832
+Time:                        23:10:50   Log-likelihood                 1.122e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      36.560
+Entities:                         102   P-value                           0.0000
+Avg Obs:                       20.588   Distribution:                  F(4,1994)
+Min Obs:                       7.0000                                           
+Max Obs:                       21.000   F-statistic (robust):             5.8813
+                                        P-value                           0.0001
+Time periods:                      21   Distribution:                  F(4,1994)
+Avg Obs:                      100.000                                           
+Min Obs:                       93.000                                           
+Max Obs:                       102.00                                           
+                                                                                
+                                            Parameter Estimates                                            
+===========================================================================================================
+                                         Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-----------------------------------------------------------------------------------------------------------
+Intercept                                   0.0119     0.0006     21.315     0.0000      0.0108      0.0129
+PolExpTaxBase                               1.4866     0.5015     2.9641     0.0031      0.5030      2.4703
+UnconditionalGrantTaxBase                  -0.5568     0.1387    -4.0157     0.0001     -0.8287     -0.2849
+PolExpTaxBase:Provider_PPSA                -1.2075     0.5273    -2.2898     0.0221     -2.2416     -0.1733
+UnconditionalGrantTaxBase:Provider_PPSA     0.6106     0.1510     4.0447     0.0001      0.3146      0.9067
+===========================================================================================================
+
+F-test for Poolability: 23.008
+P-value: 0.0000
+Distribution: F(101,1994)
+
+Included effects: Entity

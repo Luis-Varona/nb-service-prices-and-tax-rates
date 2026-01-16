@@ -1,0 +1,35 @@
+
+=== CLUSTER 0 ===
+- Atholville:               Post11 =    0.282,  Year:Post11 = -0.01229
+- Bathurst:                 Post11 =    0.173,  Year:Post11 = -0.01046
+- Beresford:                Post11 =    0.110,  Year:Post11 = -0.00948
+- Petit-Rocher:             Post11 =    0.110,  Year:Post11 = -0.00889
+- Nigadoo:                  Post11 =    0.082,  Year:Post11 = -0.00679
+- Saint John:               Post11 =    0.030,  Year:Post11 = -0.00465
+- Pointe-Verte:             Post11 =    0.045,  Year:Post11 = -0.00414
+- Sackville:                Post11 =    0.015,  Year:Post11 = -0.00399
+- Riverview:                Post11 =    0.032,  Year:Post11 = -0.00372
+- Moncton:                  Post11 =   -0.001,  Year:Post11 = -0.00368
+- Oromocto:                 Post11 =    0.013,  Year:Post11 = -0.00254
+  Cluster mean: -0.00642
+  Cluster size: 11
+
+=== CLUSTER 1 ===
+- Rothesay:                 Post11 =    0.014,  Year:Post11 = -0.00100
+- Quispamsis:               Post11 =   -0.006,  Year:Post11 = -0.00077
+- Fredericton:              Post11 =    0.008,  Year:Post11 = -0.00058
+- Hampton:                  Post11 =   -0.007,  Year:Post11 =  0.00019
+- Edmundston:               Post11 =    0.025,  Year:Post11 =  0.00022
+- Grand Falls/Grand-Sault:  Post11 =    0.002,  Year:Post11 =  0.00131
+- Dieppe:                   Post11 =   -0.011,  Year:Post11 =  0.00199
+- Tide Head:                Post11 =    0.016,  Year:Post11 =  0.00208
+- Rivière-Verte:            Post11 =   -0.022,  Year:Post11 =  0.00230
+- Miramichi:                Post11 =   -0.040,  Year:Post11 =  0.00262
+- Drummond:                 Post11 =   -0.020,  Year:Post11 =  0.00275
+- Dorchester:               Post11 =   -0.033,  Year:Post11 =  0.00316
+- Woodstock:                Post11 =   -0.032,  Year:Post11 =  0.00337
+- Saint Andrews:            Post11 =   -0.065,  Year:Post11 =  0.00422
+- Bouctouche:               Post11 =   -0.049,  Year:Post11 =  0.00499
+- Campbellton:              Post11 =   -0.065,  Year:Post11 =  0.00524
+  Cluster mean: 0.00200
+  Cluster size: 16

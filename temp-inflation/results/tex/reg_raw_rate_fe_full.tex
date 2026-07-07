@@ -1,0 +1,44 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}                       &     AvgTaxRate     & \textbf{  R-squared:         }   &      0.1368      \\
+\textbf{Estimator:}                           &      PanelOLS      & \textbf{  R-squared (Between):}  &      0.2196      \\
+\textbf{No. Observations:}                    &        2100        & \textbf{  R-squared (Within):}   &      0.1368      \\
+\textbf{Date:}                                &  Mon, Jun 22 2026  & \textbf{  R-squared (Overall):}  &      0.1883      \\
+\textbf{Time:}                                &      04:30:10      & \textbf{  Log-likelihood     }   &     1.13e+04     \\
+\textbf{Cov. Estimator:}                      &     Clustered      & \textbf{                     }   &                  \\
+\textbf{}                                     &                    & \textbf{  F-statistic:       }   &      39.426      \\
+\textbf{Entities:}                            &        102         & \textbf{  P-value            }   &      0.0000      \\
+\textbf{Avg Obs:}                             &       20.588       & \textbf{  Distribution:      }   &    F(8,1990)     \\
+\textbf{Min Obs:}                             &       7.0000       & \textbf{                     }   &                  \\
+\textbf{Max Obs:}                             &       21.000       & \textbf{  F-statistic (robust):} &      16.702      \\
+\textbf{}                                     &                    & \textbf{  P-value            }   &      0.0000      \\
+\textbf{Time periods:}                        &         21         & \textbf{  Distribution:      }   &    F(8,1990)     \\
+\textbf{Avg Obs:}                             &      100.000       & \textbf{                     }   &                  \\
+\textbf{Min Obs:}                             &       93.000       & \textbf{                     }   &                  \\
+\textbf{Max Obs:}                             &       102.00       & \textbf{                     }   &                  \\
+\textbf{}                                     &                    & \textbf{                     }   &                  \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                                              & \textbf{Parameter} & \textbf{Std. Err.} & \textbf{T-stat} & \textbf{P-value} & \textbf{Lower CI} & \textbf{Upper CI}  \\
+\midrule
+\textbf{Intercept}                            &       0.0123       &       0.0004       &      27.451     &      0.0000      &       0.0115      &       0.0132       \\
+\textbf{Post2012}                             &       0.0018       &       0.0005       &      3.2400     &      0.0012      &       0.0007      &       0.0028       \\
+\textbf{PolExpCapita}                         &       0.0105       &       0.0029       &      3.5934     &      0.0003      &       0.0048      &       0.0162       \\
+\textbf{ControlRevCapita}                     &      -0.0022       &       0.0025       &     -0.8749     &      0.3818      &      -0.0071      &       0.0027       \\
+\textbf{UncondGrantCapita}                    &       0.0010       &       0.0013       &      0.7991     &      0.4243      &      -0.0015      &       0.0035       \\
+\textbf{PolExpCapita:Provider\_PPSA}          &      -0.0033       &       0.0035       &     -0.9517     &      0.3414      &      -0.0101      &       0.0035       \\
+\textbf{PolExpCapita:Post2012}                &      -0.0075       &       0.0020       &     -3.7839     &      0.0002      &      -0.0113      &      -0.0036       \\
+\textbf{Provider\_PPSA:Post2012}              &      -0.0011       &       0.0006       &     -1.7116     &      0.0871      &      -0.0024      &       0.0002       \\
+\textbf{PolExpCapita:Provider\_PPSA:Post2012} &       0.0062       &       0.0029       &      2.1107     &      0.0349      &       0.0004      &       0.0119       \\
+\bottomrule
+\end{tabular}
+%\caption{PanelOLS Estimation Summary}
+\end{center}
+
+F-test for Poolability: 21.256 \newline
+ P-value: 0.0000 \newline
+ Distribution: F(101,1990) \newline
+  \newline
+ Included effects: Entity

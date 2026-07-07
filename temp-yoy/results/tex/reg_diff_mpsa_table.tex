@@ -1,0 +1,44 @@
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{minipage}{\textwidth}
+    \centering
+    {\normalsize YearDiff=True, HasMuni=False}
+    \vspace{6pt}
+    \begin{tabular}{lcccccc}
+        \toprule
+         & (1) & (2) & (3) & (4) & (5) & (6) \\
+         & OLS & OLS & OLS & FE & FE & FE \\
+        \midrule
+        PolExpCapita & $0.0022$ & $0.0032^{*}$ & $0.0031^{*}$ & $0.0027$ & $0.0037^{*}$ & $0.0035^{*}$ \\
+         & $(0.0018)$ & $(0.0018)$ & $(0.0018)$ & $(0.0020)$ & $(0.0019)$ & $(0.0020)$ \\[4pt]
+        PPSA & $-0.0001$ & $-4.048\text{e-}05$ & $-4.172\text{e-}05$ &  &  &  \\
+         & $(4.050\text{e-}05)$ & $(4.797\text{e-}05)$ & $(4.835\text{e-}05)$ &  &  &  \\[4pt]
+        Post2012 & $-4.440\text{e-}05^{*}$ & $-3.008\text{e-}05$ & $-2.899\text{e-}05$ & $-4.187\text{e-}05$ & $-2.785\text{e-}05$ & $-2.659\text{e-}05$ \\
+         & $(2.687\text{e-}05)$ & $(0.0001)$ & $(0.0001)$ & $(2.670\text{e-}05)$ & $(0.0001)$ & $(0.0001)$ \\[4pt]
+        PolExpCapita * PPSA & $-0.0019$ & $-0.0027$ & $-0.0027$ & $-0.0025$ & $-0.0031$ & $-0.0031$ \\
+         & $(0.0030)$ & $(0.0034)$ & $(0.0035)$ & $(0.0031)$ & $(0.0036)$ & $(0.0036)$ \\[4pt]
+        PolExpCapita * Post2012 & $0.0011$ & $0.0019$ & $0.0016$ & $0.0005$ & $0.0013$ & $0.0010$ \\
+         & $(0.0020)$ & $(0.0021)$ & $(0.0023)$ & $(0.0022)$ & $(0.0022)$ & $(0.0024)$ \\[4pt]
+        PPSA * Post2012 & $0.0001$ & $4.035\text{e-}05$ & $3.582\text{e-}05$ & $0.0001$ & $4.150\text{e-}05$ & $3.633\text{e-}05$ \\
+         & $(0.0001)$ & $(0.0001)$ & $(0.0001)$ & $(0.0001)$ & $(0.0001)$ & $(0.0001)$ \\[4pt]
+        PolExpCapita * PPSA * Post2012 & $-0.0006$ & $-0.0001$ & $-2.633\text{e-}05$ & $0.0001$ & $0.0005$ & $0.0005$ \\
+         & $(0.0032)$ & $(0.0038)$ & $(0.0038)$ & $(0.0033)$ & $(0.0039)$ & $(0.0039)$ \\[4pt]
+        ControlRevCapita &  & $-0.0066$ & $-0.0066$ &  & $-0.0067$ & $-0.0067$ \\
+         &  & $(0.0042)$ & $(0.0042)$ &  & $(0.0042)$ & $(0.0042)$ \\[4pt]
+        UncondGrantCapita &  &  & $0.0006$ &  &  & $0.0008$ \\
+         &  &  & $(0.0020)$ &  &  & $(0.0021)$ \\[4pt]
+        \midrule
+        Controls & None & CtrlRev & Full & None & CtrlRev & Full \\
+        Entity FE & No & No & No & Yes & Yes & Yes \\
+        $N$ & 1692 & 1692 & 1692 & 1692 & 1692 & 1692 \\
+        $R^2$ & $0.0005$ & $0.2222$ & $0.2224$ & $0.0004$ & $0.2272$ & $0.2273$ \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{6pt}
+    {\scriptsize Standard errors clustered by municipality in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.}
+
+    {\scriptsize ControlRevCapita = (Total Revenue $-$ Warrant $-$ Unconditional Grant) / capita.}
+    \end{minipage}
+\end{table}

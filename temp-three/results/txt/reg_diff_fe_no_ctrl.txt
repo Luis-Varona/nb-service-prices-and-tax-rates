@@ -1,0 +1,40 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:             AvgTaxRate   R-squared:                        0.0023
+Estimator:                   PanelOLS   R-squared (Between):              0.0232
+No. Observations:                1998   R-squared (Within):               0.0023
+Date:                Fri, Jun 26 2026   R-squared (Overall):              0.0027
+Time:                        14:00:51   Log-likelihood                 1.046e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      0.4775
+Entities:                         102   P-value                           0.8906
+Avg Obs:                       19.588   Distribution:                  F(9,1887)
+Min Obs:                       6.0000                                           
+Max Obs:                       20.000   F-statistic (robust):             2.9283
+                                        P-value                           0.0019
+Time periods:                      20   Distribution:                  F(9,1887)
+Avg Obs:                       99.900                                           
+Min Obs:                       93.000                                           
+Max Obs:                       102.00                                           
+                                                                                
+                                            Parameter Estimates                                             
+============================================================================================================
+                                          Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------------------------------------
+Intercept                                 7.135e-05  1.733e-05     4.1172     0.0000   3.736e-05      0.0001
+Post2012                                 -4.187e-05  2.671e-05    -1.5678     0.1171  -9.426e-05   1.051e-05
+PolExpCapita                                 0.0027     0.0020     1.3439     0.1791     -0.0012      0.0066
+PolExpCapita:Provider_PPSA                  -0.0025     0.0031    -0.8007     0.4234     -0.0087      0.0036
+PolExpCapita:Provider_Municipal             -0.0035     0.0033    -1.0556     0.2913     -0.0099      0.0030
+PolExpCapita:Post2012                        0.0005     0.0022     0.2090     0.8345     -0.0038      0.0048
+Provider_PPSA:Post2012                    5.169e-05   5.03e-05     1.0276     0.3042  -4.696e-05      0.0002
+Provider_Municipal:Post2012                 -0.0002     0.0001    -1.6164     0.1062     -0.0005   4.526e-05
+PolExpCapita:Provider_PPSA:Post2012          0.0001     0.0033     0.0377     0.9699     -0.0063      0.0066
+PolExpCapita:Provider_Municipal:Post2012    -0.0051     0.0081    -0.6370     0.5242     -0.0210      0.0107
+============================================================================================================
+
+F-test for Poolability: 0.3709
+P-value: 1.0000
+Distribution: F(101,1887)
+
+Included effects: Entity

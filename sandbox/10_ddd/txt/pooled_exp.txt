@@ -1,0 +1,33 @@
+                          PooledOLS Estimation Summary                          
+================================================================================
+Dep. Variable:             AvgTaxRate   R-squared:                        0.2043
+Estimator:                  PooledOLS   R-squared (Between):              0.2862
+No. Observations:                2100   R-squared (Within):               0.0710
+Date:                Wed, May 13 2026   R-squared (Overall):              0.2043
+Time:                        00:56:21   Log-likelihood                 1.035e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      67.124
+Entities:                         102   P-value                           0.0000
+Avg Obs:                       20.588   Distribution:                  F(8,2091)
+Min Obs:                       7.0000                                           
+Max Obs:                       21.000   F-statistic (robust):             26.765
+                                        P-value                           0.0000
+Time periods:                      21   Distribution:                  F(8,2091)
+Avg Obs:                      100.000                                           
+Min Obs:                       93.000                                           
+Max Obs:                       102.00                                           
+                                                                                
+                                          Parameter Estimates                                          
+=======================================================================================================
+                                     Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-------------------------------------------------------------------------------------------------------
+Intercept                               0.0102     0.0005     21.104     0.0000      0.0093      0.0112
+Provider_PPSA                           0.0015     0.0007     2.1851     0.0290      0.0002      0.0029
+Post2012                                0.0018     0.0007     2.5336     0.0114      0.0004      0.0031
+PolExpCapita                            0.0223     0.0031     7.2815     0.0000      0.0163      0.0283
+OtherExpCapita                      -1.552e-05     0.0004    -0.0375     0.9701     -0.0008      0.0008
+PolExpCapita:Provider_PPSA             -0.0124     0.0050    -2.4944     0.0127     -0.0221     -0.0026
+PolExpCapita:Post2012                  -0.0118     0.0028    -4.2355     0.0000     -0.0173     -0.0063
+Provider_PPSA:Post2012                  0.0001     0.0008     0.1798     0.8574     -0.0014      0.0017
+PolExpCapita:Provider_PPSA:Post2012     0.0021     0.0038     0.5429     0.5873     -0.0054      0.0096
+=======================================================================================================

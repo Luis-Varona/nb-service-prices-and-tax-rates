@@ -1,0 +1,43 @@
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}                       &     AvgTaxRate     & \textbf{  R-squared:         }   &      0.2272      \\
+\textbf{Estimator:}                           &      PanelOLS      & \textbf{  R-squared (Between):}  &     -0.1015      \\
+\textbf{No. Observations:}                    &        1692        & \textbf{  R-squared (Within):}   &      0.2272      \\
+\textbf{Date:}                                &  Fri, Jun 26 2026  & \textbf{  R-squared (Overall):}  &      0.2221      \\
+\textbf{Time:}                                &      01:38:43      & \textbf{  Log-likelihood     }   &      9036.2      \\
+\textbf{Cov. Estimator:}                      &     Clustered      & \textbf{                     }   &                  \\
+\textbf{}                                     &                    & \textbf{  F-statistic:       }   &      67.147      \\
+\textbf{Entities:}                            &         86         & \textbf{  P-value            }   &      0.0000      \\
+\textbf{Avg Obs:}                             &       19.674       & \textbf{  Distribution:      }   &    F(7,1599)     \\
+\textbf{Min Obs:}                             &       12.000       & \textbf{                     }   &                  \\
+\textbf{Max Obs:}                             &       20.000       & \textbf{  F-statistic (robust):} &      2.2183      \\
+\textbf{}                                     &                    & \textbf{  P-value            }   &      0.0303      \\
+\textbf{Time periods:}                        &         20         & \textbf{  Distribution:      }   &    F(7,1599)     \\
+\textbf{Avg Obs:}                             &       84.600       & \textbf{                     }   &                  \\
+\textbf{Min Obs:}                             &       78.000       & \textbf{                     }   &                  \\
+\textbf{Max Obs:}                             &       86.000       & \textbf{                     }   &                  \\
+\textbf{}                                     &                    & \textbf{                     }   &                  \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                                              & \textbf{Parameter} & \textbf{Std. Err.} & \textbf{T-stat} & \textbf{P-value} & \textbf{Lower CI} & \textbf{Upper CI}  \\
+\midrule
+\textbf{Intercept}                            &     9.307e-05      &     2.702e-05      &      3.4450     &      0.0006      &     4.008e-05     &       0.0001       \\
+\textbf{Post2012}                             &     -2.785e-05     &     5.329e-05      &     -0.5226     &      0.6013      &      -0.0001      &     7.667e-05      \\
+\textbf{PolExpCapita}                         &       0.0037       &       0.0019       &      1.9165     &      0.0555      &     -8.575e-05    &       0.0074       \\
+\textbf{ControlRevCapita}                     &      -0.0067       &       0.0042       &     -1.5931     &      0.1113      &      -0.0149      &       0.0015       \\
+\textbf{PolExpCapita:Provider\_PPSA}          &      -0.0031       &       0.0036       &     -0.8618     &      0.3889      &      -0.0101      &       0.0039       \\
+\textbf{PolExpCapita:Post2012}                &       0.0013       &       0.0022       &      0.5840     &      0.5593      &      -0.0031      &       0.0057       \\
+\textbf{Provider\_PPSA:Post2012}              &      4.15e-05      &     7.066e-05      &      0.5873     &      0.5571      &     -9.709e-05    &       0.0002       \\
+\textbf{PolExpCapita:Provider\_PPSA:Post2012} &       0.0005       &       0.0039       &      0.1345     &      0.8930      &      -0.0071      &       0.0082       \\
+\bottomrule
+\end{tabular}
+%\caption{PanelOLS Estimation Summary}
+\end{center}
+
+F-test for Poolability: 0.4184 \newline
+ P-value: 1.0000 \newline
+ Distribution: F(85,1599) \newline
+  \newline
+ Included effects: Entity

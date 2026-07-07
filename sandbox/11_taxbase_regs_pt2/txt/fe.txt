@@ -1,0 +1,33 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:          TaxBaseCapita   R-squared:                        0.0095
+Estimator:                   PanelOLS   R-squared (Between):              0.0106
+No. Observations:                2100   R-squared (Within):               0.0095
+Date:                Wed, May 13 2026   R-squared (Overall):              0.0093
+Time:                        13:51:05   Log-likelihood                 -1.39e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      9.5295
+Entities:                         102   P-value                           0.0001
+Avg Obs:                       20.588   Distribution:                  F(2,1996)
+Min Obs:                       7.0000                                           
+Max Obs:                       21.000   F-statistic (robust):             11.166
+                                        P-value                           0.0000
+Time periods:                      21   Distribution:                  F(2,1996)
+Avg Obs:                      100.000                                           
+Min Obs:                       93.000                                           
+Max Obs:                       102.00                                           
+                                                                                
+                                   Parameter Estimates                                    
+==========================================================================================
+                        Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------------------
+Intercept                  49.493     4.0068     12.352     0.0000      41.635      57.351
+Post2012                   39.369     10.275     3.8316     0.0001      19.218      59.519
+Provider_PPSA:Post2012    -4.5714     16.243    -0.2814     0.7784     -36.426      27.283
+==========================================================================================
+
+F-test for Poolability: 1.2482
+P-value: 0.0513
+Distribution: F(101,1996)
+
+Included effects: Entity

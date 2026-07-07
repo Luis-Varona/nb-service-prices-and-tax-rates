@@ -1,0 +1,35 @@
+\documentclass[border=10pt,varwidth=25cm]{standalone}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\renewenvironment{table}[1][]{}{}
+\begin{document}
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{minipage}{\textwidth}
+    \centering
+    {\normalsize Adjusted for Inflation}
+    \vspace{6pt}
+    \begin{tabular}{lcc}
+        \toprule
+         & (1) & (2) \\
+         & OLS & FE \\
+        \midrule
+        PPSA & $-14.0440^{**}$ &  \\
+         & $(5.8919)$ &  \\[4pt]
+        Post2012 & $29.7294^{***}$ & $29.2928^{***}$ \\
+         & $(10.3336)$ & $(10.2677)$ \\[4pt]
+        PPSA * Post2012 & $-2.9067$ & $-2.5101$ \\
+         & $(16.3988)$ & $(16.2612)$ \\[4pt]
+        \midrule
+        Entity FE & No & Yes \\
+        $N$ & 2100 & 2100 \\
+        $R^2$ & $0.0066$ & $0.0055$ \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{6pt}
+    {\scriptsize Standard errors clustered by municipality in parentheses. $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.}
+    \end{minipage}
+\end{table}
+\end{document}
